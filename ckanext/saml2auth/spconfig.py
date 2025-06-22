@@ -58,6 +58,7 @@ def get_config():
     acs_endpoint = ckan_config.get('ckanext.saml2auth.acs_endpoint', '/acs')
     logout_requests_signed = \
         asbool(ckan_config.get(u'ckanext.saml2auth.logout_requests_signed', False))
+    authn_requests_signed = bool(key_file)
     logout_expected_binding = ckan_config.get(u'ckanext.saml2auth.logout_expected_binding',
                                               entity.BINDING_HTTP_POST)
 
@@ -77,7 +78,8 @@ def get_config():
                 u'want_response_signed': response_signed,
                 u'want_assertions_signed': assertion_signed,
                 u'want_assertions_or_response_signed': any_signed,
-                u'logout_requests_signed': logout_requests_signed
+                u'logout_requests_signed': logout_requests_signed,
+                u'authn_requests_signed': authn_requests_signed
             }
         },
         u'logout_expected_binding': logout_expected_binding,
