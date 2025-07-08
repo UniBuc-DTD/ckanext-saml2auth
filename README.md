@@ -170,7 +170,7 @@ To install ckanext-saml2auth for development, activate your CKAN
 virtualenv and do:
 
     sudo apt install xmlsec1
-    git clone https://github.com/duskobogdanovski/ckanext-saml2auth.git
+    git clone https://github.com/UniBuc-DTD/ckanext-saml2auth.git
     cd ckanext-saml2auth
     python setup.py develop
     pip install -r dev-requirements.txt
@@ -222,7 +222,7 @@ to PyPI follow these steps:
 
         git tag 0.0.1
         git push --tags
-        
+
 
   [CI]: https://github.com/keitaroinc/ckanext-saml2auth/workflows/CI/badge.svg
   [1]: https://github.com/keitaroinc/ckanext-saml2auth/actions
