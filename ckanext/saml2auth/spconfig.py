@@ -48,6 +48,13 @@ def get_config():
     remote_cert = \
         ckan_config.get(u'ckanext.saml2auth.idp_metadata.remote_cert')
 
+    mdq_url = \
+        ckan_config.get(u'ckanext.saml2auth.idp_metadata.mdq_url')
+    mdq_cert = \
+        ckan_config.get(u'ckanext.saml2auth.idp_metadata.mdq_cert')
+    mdq_freshness_period = \
+        ckan_config.get(u'ckanext.saml2auth.idp_metadata.mdq_freshness_period', u'P0Y0M0DT2H0M0S')
+
     entity_id = ckan_config.get(u'ckanext.saml2auth.entity_id', u'urn:mace:umu.se:saml:ckan:sp')
     response_signed = asbool(ckan_config.get(u'ckanext.saml2auth.want_response_signed', True))
     assertion_signed = asbool(ckan_config.get(u'ckanext.saml2auth.want_assertions_signed', False))
@@ -86,7 +93,7 @@ def get_config():
         u'metadata': {},
         u'debug': 1 if debug else 0,
         u'name_form': NAME_FORMAT_URI
-        }
+    }
 
     if name_id_policy_format:
         config[u'service'][u'sp'][u'name_id_policy_format'] = name_id_policy_format
@@ -107,5 +114,12 @@ def get_config():
                 u'cert': remote_cert
             }]
         config[u'metadata'][u'remote'] = remote
+    elif location == u'mdq':
+        mdq_service = {
+            u'url': mdq_url,
+            u'cert': mdq_cert,
+            u'freshness_period': mdq_freshness_period,
+        }
+        config[u'metadata'][u'mdq'] = [mdq_service]
 
     return config

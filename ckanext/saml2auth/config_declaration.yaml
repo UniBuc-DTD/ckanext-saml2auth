@@ -7,7 +7,7 @@ groups:
         default: remote
         description: |
           Specifies the metadata location type.
-          Options: local or remote
+          Options: local, remote or mdq
         required: true
       - key: ckanext.saml2auth.idp_metadata.local_path
         example: /opt/metadata/idp.xml
@@ -29,6 +29,24 @@ groups:
         description: |
           Path to a local file accessible on the server the service runs on
           Ignore this config if the idp metadata location is set to: local and metadata is public
+        required: false
+      - key: ckanext.saml2auth.idp_metadata.mdq_url
+        example: http://mdq.ukfederation.org.uk/
+        default:
+        description: |
+          Public URL of the Metadata Query Service (MDS) endpoint.
+        required: false
+      - key: ckanext.saml2auth.idp_metadata.mdq_cert
+        example: http://mdq.ukfederation.org.uk/
+        default:
+        description: |
+          Location of a PEM-encoded certificate used for signing metadata responses returned by the MDS.
+        required: false
+      - key: ckanext.saml2auth.idp_metadata.mdq_freshness_period
+        example: P0Y0M0DT2H0M0S
+        default: P0Y0M0DT2H0M0S
+        description: |
+          How long to cache responses from the MDS server.
         required: false
       - key: ckanext.saml2auth.user_firstname
         example: name
