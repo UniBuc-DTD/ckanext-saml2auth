@@ -327,7 +327,7 @@ def saml2login():
     if discovery_service_url and not idp_entity_id:
         redirect_url = client.create_discovery_service_request(
             discovery_service_url,
-            client.config['entityid'],
+            client.config.getattr('entityid'),
             return_url=toolkit.url_for('saml2auth.saml2login')
         )
         return toolkit.redirect_to(redirect_url)
