@@ -187,3 +187,10 @@ groups:
         description: |
           The default endpoint to redirect to if no RelayState is provided in the SAML response.
         required: false
+      - key: ckanext.saml2auth.discovery_service_url
+        example: https://use.thiss.io/ds
+        default:
+        description: |
+          URL to the Discovery Service endpoint, to allow users
+          to select their preferred identity provider.
+        required: false

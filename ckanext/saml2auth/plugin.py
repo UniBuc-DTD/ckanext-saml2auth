@@ -62,7 +62,7 @@ class Saml2AuthPlugin(plugins.SingletonPlugin):
         config_options = (
             'ckanext.saml2auth.user_email',
         )
-        if not config.get('ckanext.saml2auth.idp_metadata.local_path'):
+        if config.get('ckanext.saml2auth.idp_metadata.location', 'remote') == 'remote':
             config_options += ('ckanext.saml2auth.idp_metadata.remote_url',)
         for option in config_options:
             if not config.get(option, None):

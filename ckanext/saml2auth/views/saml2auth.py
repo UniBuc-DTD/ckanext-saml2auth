@@ -320,6 +320,18 @@ def saml2login():
     requested_authn_contexts = _get_requested_authn_contexts()
     relay_state = toolkit.request.args.get('came_from', '')
 
+    discovery_service_url = config.get('ckanext.saml2auth.discovery_service_url')
+    idp_entity_id = toolkit.request.args.get('entityID')
+
+    # Redirect to discovery service
+    if discovery_service_url and not idp_entity_id:
+        redirect_url = client.create_discovery_service_request(
+            discovery_service_url,
+            client.config['entityid'],
+            return_url=toolkit.url_for('saml2auth.saml2login')
+        )
+        return toolkit.redirect_to(redirect_url)
+
     if len(requested_authn_contexts) > 0:
         comparison = config.get('ckanext.saml2auth.requested_authn_context_comparison',
                                 'minimum')
