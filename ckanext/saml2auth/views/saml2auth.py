@@ -344,7 +344,11 @@ def saml2login():
             comparison=comparison
         )
 
-        reqid, info = client.prepare_for_authenticate(idp_entity_id, requested_authn_context=final_context, relay_state=relay_state)
+        reqid, info = client.prepare_for_authenticate(
+            idp_entity_id,
+            requested_authn_context=final_context,
+            relay_state=relay_state
+        )
     else:
         reqid, info = client.prepare_for_authenticate(idp_entity_id, relay_state=relay_state)
 
