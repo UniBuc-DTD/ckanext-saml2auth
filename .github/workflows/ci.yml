@@ -91,12 +91,6 @@ jobs:
           echo "Running SAML2AUTH tests"
           pytest --ckan-ini=subdir/test.ini --cov=ckanext.saml2auth --disable-warnings ckanext/saml2auth/tests
 
-      - name: Coveralls
-        uses: AndreMiras/coveralls-python-action@develop
-        with:
-          parallel: true
-          flag-name: Python ${{ matrix.python-version }} Unit Test
-
   publish:
     needs: test
     runs-on: ubuntu-latest
@@ -116,19 +110,3 @@ jobs:
         run: |
           python setup.py sdist bdist_wheel
           twine check dist/*
-
-      - name: Publish package
-        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          user: __token__
-          password: ${{ secrets.PYPI_API_TOKEN }}
-
-  coveralls_finish:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-    - name: Coveralls Finished
-      uses: AndreMiras/coveralls-python-action@develop
-      with:
-        parallel-finished: true
