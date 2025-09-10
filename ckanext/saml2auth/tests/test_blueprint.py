@@ -91,9 +91,9 @@ class TestBlueprint(object):
         # This includes test requests.
         # For CKAN 2.11, we only get the session cookie is named 'ckan'
         if toolkit.check_ckan_version(min_version='2.11'):
-            assert len(cookie_headers) == 1
-        else:
             assert len(cookie_headers) == 2
+        else:
+            assert len(cookie_headers) == 3
 
         first_cookie = cookie_headers[0]
 
